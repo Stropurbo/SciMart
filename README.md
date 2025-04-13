@@ -1,4 +1,3 @@
-readme_content = """
 # 🛒 SciMart – E-commerce API with Django REST Framework
 
 SciMart is a fully functional e-commerce backend built with **Django** and **Django REST Framework (DRF)**. It includes a wide range of APIs for managing products, categories, orders, and reviews, with secure **JWT-based authentication** using **Djoser**. The project also features interactive API documentation using **drf-yasg (Swagger)**.
