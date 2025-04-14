@@ -1,0 +1,16 @@
+{
+    "builds": [{
+        "src" : "sci_mart/wsgi.py",
+        "use" : "@vercel/python",
+        "config" : {
+            "maxLambdaSize": "15mb", 
+            "runtime": "python3.11.3"
+        }
+    }],
+    "routes":[
+        {
+            "src": "/(.*)",
+            "dest": "sci_mart/wsgi.py"
+        }
+    ]
+}
