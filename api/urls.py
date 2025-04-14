@@ -2,7 +2,6 @@ from django.urls import path, include
 from product.views import ProductViewset, CategoryViewSet, ReviewViewSet, ProductImageViewSet
 from order.views import CartViewSet, CartItemViewSet, OrderViewSet
 from rest_framework_nested import routers
-from django.http import JsonResponse
 
 router = routers.DefaultRouter()
 router.register('products', ProductViewset, basename="products")
@@ -27,7 +26,4 @@ urlpatterns = [
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
 
-]
-urlpatterns += [
-    path('', lambda request: JsonResponse({"message": "SciMart API is working!"}))
 ]
