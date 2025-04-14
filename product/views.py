@@ -18,15 +18,16 @@ class ProductViewset(ModelViewSet):
     - User can browser and filter products
     - support searching by name, category, and description
     - support ordering by price
-    """   
-
-    queryset = Product.objects.all()
+    """
     serializer_class = ProductSerializers
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_class = ProductFilter
     search_fields = ['name', 'description']
     ordering_fields = ['price']
     permission_classes = [IsAdminOrReadOnly]
+
+    def get_queryset(self):
+        return Product.objects.prefetch_related('images').all()
 
 
     @swagger_auto_schema(
