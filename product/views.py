@@ -12,13 +12,6 @@ from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 
 class ProductViewset(ModelViewSet):
-    """
-    API Endpoints for managing products for an e-commarce store
-    - Admin can create, update and delete products
-    - User can browser and filter products
-    - support searching by name, category, and description
-    - support ordering by price
-    """
     serializer_class = ProductSerializers
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_class = ProductFilter

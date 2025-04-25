@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from order.models import Cart, CartItem, Order,OderItem
 from product.models import Product
-from product.serializers import ProductSerializers
 from order.services import OrderServices
 
 class EmptySerializer(serializers.Serializer):
@@ -111,5 +110,7 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = ['id', 'user', 'status', 'total_price', 'created_at', 'items']
+
+        
 
 
