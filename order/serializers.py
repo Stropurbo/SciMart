@@ -63,9 +63,7 @@ class CartSerializer(serializers.ModelSerializer):
         read_only_fields = ['user']
 
     def get_total_price(self, cart:Cart):
-       return sum(
-        [item.product.price * item.quantity for item in cart.items.all()]  
-       ) 
+       return sum( [item.product.price * item.quantity for item in cart.items.all()]  ) 
 
 class CreateOrderSerializer(serializers.Serializer):
     cart_id = serializers.UUIDField()
