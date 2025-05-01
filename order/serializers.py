@@ -30,11 +30,12 @@ class AddCartItemSerializer(serializers.ModelSerializer):
             cart_item.save()
             self.instance = cart_item
         except CartItem.DoesNotExist:
+            product = Product.objects.get(pk=product_id) 
             self.instance = CartItem.objects.create(
-                cart_id=cart_id,                 
-                **self.validated_data
-            )
-
+            cart_id=cart_id,
+            product=product,          
+            quantity=quantity
+        )
         return self.instance
     
     def validate_product_id(self, value):
