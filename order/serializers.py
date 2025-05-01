@@ -13,6 +13,7 @@ class SimpleProductSerializer(serializers.ModelSerializer):
 
 class AddCartItemSerializer(serializers.ModelSerializer):
     product_id = serializers.IntegerField()
+    quantity = serializers.IntegerField()
 
     class Meta:
         model = CartItem
@@ -26,9 +27,13 @@ class AddCartItemSerializer(serializers.ModelSerializer):
         try:
             cart_item = CartItem.objects.get(cart_id=cart_id, product_id=product_id)
             cart_item.quantity += quantity
-            self.instance = cart_item.save()
+            cart_item.save()
+            self.instance = cart_item
         except CartItem.DoesNotExist:
-            self.instance = CartItem.objects.create(cart_id=cart_id, **self.validated_data)
+            self.instance = CartItem.objects.create(
+                cart_id=cart_id,                 
+                **self.validated_data
+            )
 
         return self.instance
     
