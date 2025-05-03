@@ -78,6 +78,7 @@ WSGI_APPLICATION = 'sci_mart.wsgi.app'
 
 CORS_ALLOWED_ORIGINS = [
 "http://localhost:5173",
+"https://sci-mart.vercel.app",
 ]
     
 
@@ -152,6 +153,7 @@ USE_TZ = True
 
 
 BACKEND_URL = config('BACKEND_URL')
+FRONTEND_URL = config('FRONTEND_URL')
 
 
 STATIC_URL = 'static/'
