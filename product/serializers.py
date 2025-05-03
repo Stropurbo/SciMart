@@ -44,7 +44,10 @@ class ReviewSerializer(serializers.ModelSerializer):
         read_only_fields = ['user', 'product']
 
     def get_user(self, obj):
-        return obj.user.get_full_name()
+        return {
+            "id": obj.user.id,
+            "name": obj.user.get_full_name()
+        }
 
     def get_product(self, obj):
         return obj.product.name
