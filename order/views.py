@@ -2,7 +2,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect
 from rest_framework.viewsets import GenericViewSet, ModelViewSet
 from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, DestroyModelMixin
-from order.models import Cart, CartItem, Order
+import order
+from order.models import Cart, CartItem, Order, OderItem
 from rest_framework.permissions import IsAuthenticated,IsAdminUser
 from order import serializers as Allsz
 from rest_framework.decorators import action
@@ -12,7 +13,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from sslcommerz_lib import SSLCOMMERZ 
 from django.conf import settings as projectsetting
-
+from rest_framework.views import APIView
 class CartViewSet(CreateModelMixin,RetrieveModelMixin, DestroyModelMixin, GenericViewSet):
     serializer_class = Allsz.CartSerializer
     permission_classes = [IsAuthenticated]
@@ -32,7 +33,6 @@ class CartViewSet(CreateModelMixin,RetrieveModelMixin, DestroyModelMixin, Generi
     def perform_create(self, serializer):
         serializer.save(user = self.request.user)
         
-
 class CartItemViewSet(ModelViewSet):
     http_method_names = ['get', 'post', 'patch','delete']
     def get_serializer_class(self):
@@ -91,6 +91,15 @@ class OrderViewSet(ModelViewSet):
         if self.request.user.is_staff:
             return Order.objects.prefetch_related('items__product').all()
         return Order.objects.prefetch_related('items__product').filter(user = self.request.user)
+    
+
+class HasOrderProduct(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, product_id):
+        user = request.user
+        has_ordered = OderItem.objects.filter(order__user=user, product_id=product_id).exists()
+        return Response({"hasOrder": has_ordered})
     
 
 @api_view(['POST'])
