@@ -3,17 +3,10 @@ from datetime import timedelta
 from decouple import config
 import cloudinary
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-zu2un4x34&7zlqf_1gqoqv(6^c70lnn61qrul1_8(7-5&la3yw'
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 ALLOWED_HOSTS = [".vercel.app", '127.0.0.1']
@@ -79,6 +72,7 @@ WSGI_APPLICATION = 'sci_mart.wsgi.app'
 CORS_ALLOWED_ORIGINS = [
 "http://localhost:5173",
 "https://sci-mart.vercel.app",
+"https://scimart-client.vercel.app",
 ]
     
 
@@ -108,10 +102,6 @@ DATABASES = {
 #     }
 # }
 
-
-# Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -138,10 +128,6 @@ cloudinary.config(
 
 #Media Storage setting
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
-
-# Internationalization
-# https://docs.djangoproject.com/en/5.1/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
@@ -170,7 +156,7 @@ REST_FRAMEWORK = {
      'COERCE_DECIMAL_TO_STRING' : False,
      'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
      'PAGE_SIZE' : 10,
-      'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
      'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),

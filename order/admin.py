@@ -10,6 +10,5 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ['id', 'user', 'status']
 
 
-
 admin.site.register(CartItem)
 admin.site.register(OderItem)

@@ -22,7 +22,6 @@ class ProductViewset(ModelViewSet):
     def get_queryset(self):
         return Product.objects.prefetch_related('images').all()
 
-
     @swagger_auto_schema(
             operation_summary="Retrive a list of product"
     )
@@ -48,7 +47,7 @@ class ProductImageViewSet(ModelViewSet):
     def get_queryset(self):
         return ProductImage.objects.filter(product_id = self.kwargs.get('product_pk'))
     
-    def perform_create(self, serializer):
+    def perform_create(self, serializer):   
         serializer.save(product_id = self.kwargs.get('product_pk'))
 
 class CategoryViewSet(ModelViewSet):

@@ -41,7 +41,7 @@ class AddCartItemSerializer(serializers.ModelSerializer):
     def validate_product_id(self, value):
         if not Product.objects.filter(pk = value).exists():
             raise serializers.ValidationError("Product doesn't exit.")
-        return value
+        return value    
     
 class UpdateCartItemSerializer(serializers.ModelSerializer):
     class Meta:

@@ -2,7 +2,6 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect
 from rest_framework.viewsets import GenericViewSet, ModelViewSet
 from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, DestroyModelMixin
-import order
 from order.models import Cart, CartItem, Order, OderItem
 from rest_framework.permissions import IsAuthenticated,IsAdminUser
 from order import serializers as Allsz
@@ -11,7 +10,7 @@ from order.services import OrderServices
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
-from sslcommerz_lib import SSLCOMMERZ 
+from sslcommerz_lib import SSLCOMMERZ
 from django.conf import settings as projectsetting
 from rest_framework.views import APIView
 class CartViewSet(CreateModelMixin,RetrieveModelMixin, DestroyModelMixin, GenericViewSet):

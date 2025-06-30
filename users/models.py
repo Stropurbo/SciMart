@@ -8,9 +8,7 @@ class CustomUserManager(BaseUserManager):
             raise ValueError("This E-mail field must be filled.")
         
         email = self.normalize_email(email)
-
         extra_fields.pop("username", None)
-
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
